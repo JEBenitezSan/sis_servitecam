@@ -11,6 +11,12 @@ $fecha_entrega = (isset($_POST['fecha_entrega'])) ? $_POST['fecha_entrega'] : ''
 $precio_inversion = (isset($_POST['precio_inversion'])) ? $_POST['precio_inversion'] : '';
 $precio_servicio = (isset($_POST['precio_servicio'])) ? $_POST['precio_servicio'] : '';
 $precio_total = (isset($_POST['precio_total'])) ? $_POST['precio_total'] : '';
+
+/// Agregar tipo servicio
+$user_modal_tiposervi = (isset($_POST['user_modal_tiposervi'])) ? $_POST['user_modal_tiposervi'] : '';
+$tipo_servicio = (isset($_POST['tipo_servicio'])) ? $_POST['tipo_servicio'] : '';
+$descrip_tiposervi = (isset($_POST['descrip_tiposervi'])) ? $_POST['descrip_tiposervi'] : '';
+
 $estado_servi = "Pendiente";
 
 
@@ -75,7 +81,22 @@ switch($opc_servi)
 
     break;
 
-    case "dele_porcen":
+    case "add_tipo_servi":
+        $insertar_tiposervi= "INSERT INTO `tipo_servicios`(`id_tiposervicio`, 
+                                                 `tipo_servicio`, 
+                                                 `descripcion_servi`, 
+                                                 `id_usuario`) 
+                                        VALUES (NULL,
+                                                '$tipo_servicio',
+                                                '$descrip_tiposervi',
+                                                '$user_modal_tiposervi')";
+        $insertartiposervi = $conexion->prepare($insertar_tiposervi);
+        $insertartiposervi->execute(); 
+
+        if($insertartiposervi->rowCount() >= 1)
+        { echo 1; }
+
+        else { echo 0; }
 
     break;
 

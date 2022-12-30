@@ -260,8 +260,9 @@ $conexion = $objeto->Conectar();
 <?php require_once "modales/modal_descuento.php";?>
 <?php require_once "modales/modal_nuevo_servicio.php";?>
 <?php require_once "modales/modal_editar_servicio.php";?>
+<?php require_once "modales/modal_add_tiposervicio.php";?>
 
-<script src="static/js/factura_servicio.js"></script>
+<script src="static/js/factura_servicio.js"></script> 
   
 
 

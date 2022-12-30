@@ -17,12 +17,14 @@
                               <input type="hidden" name="user_modal_servicio" value="<?php echo $id_usuario;?>" id="user_modal_servicio" readonly>
                               <input type="hidden" name="opc_servi" value="ingre_servi" id="opc_servi" readonly>
 
-                              <div class="form-floating mb-3">
-                                  <select class="form-select" id="selec_tipo_servi" name="selec_tipo_servi" aria-label="Floating label select example" required>
-                             
+                              <div class="input-group form-floating mb-3">
+                                     
+                                    <select class="form-select selec_tipo_servi" id="selectiposervi" name="selec_tipo_servi" aria-label="Floating label select example" required>
+                              
 
-                                  </select>
-                                  <label for="selec_tipo_servi">Tipo de servicio</label>
+                                    </select>
+                                    <label for="selec_tipo_servi">Selecciona tipo</label>
+                                    <button type="button" class="btn btn-primary" id="add_tiposervi"><i class="fas fa-plus"></i></button>
                             </div>
                             <!----------------------------------------------------->
                               <div class="form-floating mb-3">

@@ -634,7 +634,7 @@ $('#tol_servicio').on('keyup','#precio_servicio', function (){
    })
   
      .done(function(respuesta){
-         $("#selec_tipo_servi").html(respuesta);
+         $(".selec_tipo_servi").html(respuesta);
      })
      
      .fail(function() {
@@ -655,6 +655,60 @@ $(document).on('click', '.editar_servicio', function(){
     $("#id_servicio").val(id_servicio);
 
 });
+
+/// Abrir modal de agregar tipo servicios
+$(document).on('click', '#add_tiposervi', function(){
+ 
+    $('#modal_tiposervi').modal({backdrop: 'static', keyboard: false})
+    $('#modal_tiposervi').modal('show');
+
+
+});
+
+// Enviar nuevo registro de tipo de servicio
+$('#agregar_for_tiposervi').submit(function(e){                         
+    e.preventDefault(); 
+
+            $.ajax({
+            type : 'POST',
+            url : 'envios_bd/ingresar_servicio.php',
+            data : $('#agregar_for_tiposervi').serialize(),
+            success: function (data)
+                                {
+                                if (data == 1)
+                                {
+                                    document.getElementById("agregar_for_tiposervi").reset();
+                                    table_servicios.ajax.reload(null, false);
+
+                                        Swal.fire({
+                                            type: 'success',
+                                            title: 'Registrado Correctamente',
+                                            html: '<h6>Tipo de Servicio Ingresado!!!</h6>',
+                                            showConfirmButton: true
+                                            })
+                                }
+                                if (data == 0)
+                                {
+                                    Swal.fire({
+                                        type: 'error',
+                                        title: 'Registrados no ingresado',
+                                        html: '<h6>Tipo de Servicio No Ingresados!!!</h6>',
+                                        showConfirmButton: false,
+                                        timer: 1600,})
+                                }
+                                }
+
+});
+
+/// Actualizar tipo de producto
+$('#actualiza_tiposervi').click(function(){ 
+    $('#selectiposervi').load('combo_ajax/com_tiposervicio.php');
+});
+
+
+
+});
+
 
 });//// al cargar el html
 

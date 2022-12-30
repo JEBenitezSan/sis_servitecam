@@ -87,8 +87,8 @@ foreach ($consulta_numcat as $num_produc)
 {
     $num_pro_largo = $num_produc['num_productos'];
 }
-$largo2 = $num_pro_largo * 11;
-$largo =  $largo2 + 180;
+$largo2 = $num_pro_largo * 12;
+$largo =  $largo2 + 220;
 
 require('plantilla/framework/fpdf/fpdf.php');
 $pdf = new FPDF('P','mm',array(80, $largo));
@@ -138,7 +138,8 @@ $pdf->SetFont('Arial', 'B', 8);
 
             foreach ($result as $row) 
 			{		
-            $pdf->Cell (15, 5, $row['observaciones'], 0, 0, 'L', 0);
+           
+            $pdf->Write (5, $row['observaciones'], 0, 0, 'L', 0);
             $pdf->Ln();	
 
             $pdf->Cell (10, 6, '', 0, 0, 'L', 0);  

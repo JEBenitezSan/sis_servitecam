@@ -236,6 +236,8 @@ $consul_widg= "SELECT `id_caja` FROM `caja` WHERE `estado_caja` = 'Abierto'";
 
   </div>
 
+
+
 </div> <!--Fin de container-fluid-->
 <!----------------------------------------------------------->
 <?php require_once "plantilla/parte_inferior.html"?>

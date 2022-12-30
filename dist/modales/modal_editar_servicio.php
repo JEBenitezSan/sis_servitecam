@@ -23,7 +23,7 @@
                               <input type="hidden" name="opc_servi" value="ingre_servi" id="opc_servi" readonly>
 
                               <div class="form-floating mb-3">
-                                  <select class="form-select" id="selec_tipo_servi" name="selec_tipo_servi" aria-label="Floating label select example" required>
+                                  <select class="form-select selec_tipo_servi" id="selec_tipo_servi" name="selec_tipo_servi" aria-label="Floating label select example" required>
                              
 
                                   </select>
