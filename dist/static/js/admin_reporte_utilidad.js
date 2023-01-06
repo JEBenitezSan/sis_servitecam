@@ -5,6 +5,7 @@ $('#fecha_repor').on('change', '#fecha_info1', function (){
     fecha_info2  = $.trim($("#fecha_info2").val());
 
     tabla_ventas_utilidad (fecha_info1, fecha_info2);
+    tabla_ventas_servicios (fecha_info1, fecha_info2);
     tabla_11 (fecha_info1, fecha_info2);
     tabla_22 (fecha_info1, fecha_info2);
     $('#total_utilidad').html('0.000 C$');  
@@ -35,6 +36,7 @@ $('#fecha_repor').on('change', '#fecha_info2', function (){
     else 
         {
             tabla_ventas_utilidad (fecha_info1, fecha_info2);
+            tabla_ventas_servicios (fecha_info1, fecha_info2);
             tabla_11 (fecha_info1, fecha_info2);
             tabla_22 (fecha_info1, fecha_info2);
         }
@@ -46,6 +48,7 @@ fecha_info2= date.toISOString().split('T')[0];
 var fecha_info3 = "0000/00/00";
 var fecha_info1 = "0000/00/00";
 tabla_ventas_utilidad (fecha_info1, fecha_info3);
+tabla_ventas_servicios (fecha_info1, fecha_info3);
 tabla_11 (fecha_info1, fecha_info3);
 tabla_22 (fecha_info1, fecha_info3);
 
@@ -57,6 +60,7 @@ $("#cal_utili").click(function(){
     total_salidas_id = document.getElementById("total_salidas_id").textContent;
     total_entradas_id = document.getElementById("total_entradas_id").textContent;
     total_salario_id = document.getElementById("total_salario_id").textContent;
+
     console.log(total_salidas_id, total_entradas_id, total_salario_id);
 
     var total_final = parseFloat(total_salario_id) + parseFloat(total_salidas_id);
@@ -84,12 +88,12 @@ $("#guardar_final_utili").click(function(){
     val_fecha_info1 = $.trim($("#fecha_info1").val());
     val_fecha_info2 = $.trim($("#fecha_info2").val());
     total_salidas_id = document.getElementById("total_salidas_id").textContent;
-    total_entradas_id = document.getElementById("total_entradas_id").textContent;
+    gran_totalentradasid = document.getElementById("gran_totalentradasid").textContent;
     total_salario_id = document.getElementById("total_salario_id").textContent;
     user_planilla = document.getElementById("user_planilla").value;
     
     var total_final = parseFloat(total_salario_id) + parseFloat(total_salidas_id);
-    var total_final_neto = total_entradas_id - total_final;
+    var total_final_neto = gran_totalentradasid - total_final;
     opc_repor_vta = "guardar_uti_final" 
 
     if (( val_fecha_info1 == 0) || ( val_fecha_info2 == 0)) {
@@ -106,7 +110,7 @@ $("#guardar_final_utili").click(function(){
             fech1: val_fecha_info1,
             fech2: val_fecha_info2,
             salida_id: total_salidas_id,
-            entrada_id: total_entradas_id,
+            entrada_id: gran_totalentradasid,
             salario_id: total_salario_id,
             utilidad_id: total_final_neto,
             user: user_planilla,
@@ -187,11 +191,6 @@ function tabla_ventas_utilidad (fecha_1_, fecha_2_) {
             }, 0 );
             total_ventas = total_venta.toFixed(3); 
             $(this.api().column(7).footer()).html('<i class="fas fa-money-bill-wave"></i> '+ total_ventas);	
-
-            var myNumeral = numeral (total_ventas);
-            var totalventas = myNumeral.format('0,0.000');
-
-            $('#total_entradas').html(totalventas+' C$'); 
 
             $('#total_entradas_id').html(total_ventas); 
 
@@ -286,6 +285,146 @@ function tabla_ventas_utilidad (fecha_1_, fecha_2_) {
     
     });  
 }
+/// funcion de tabla de reporte de servicio
+function tabla_ventas_servicios (fecha_1_, fecha_2_) {
+
+    var today = new Date();
+    const fecha_expor = today.toLocaleString() 
+
+    const fecha_1 = fecha_1_;
+    const fecha_2 = fecha_2_;
+
+    var opc_repor_vta = 'lista_servicio';
+    reporte_ventas_utilidad = $('#reporte_ventas_servicios').DataTable({  
+
+        "footerCallback": function ( row, data, start, end, display )
+        {
+            
+            //----------------->
+
+            total_inver = this.api()
+                .column(3)
+                .data()
+                .reduce(function (a, b) {
+                    return parseFloat(a) + parseFloat(b);
+                }, 0 );
+                totalinver = total_inver.toFixed(3); 
+            $(this.api().column(3).footer()).html('<i class="fas fa-tags"></i> '+totalinver);	
+            
+            //----------------->
+            
+            total_venta_servi = this.api()
+            .column(7)
+            .data()
+            .reduce(function (a, b) {
+                return parseFloat(a) + parseFloat(b);
+            }, 0 );
+            total_ventas_servi = total_venta_servi; 
+            $(this.api().column(7).footer()).html('<i class="fas fa-money-bill-wave"></i> '+ total_ventas_servi.toFixed(3));	
+            $('#total_servicios_id').html(total_ventas_servi.toFixed(3)); 
+
+            total_entradas_id = document.getElementById("total_entradas_id").textContent;
+            totalentrada = parseFloat(total_ventas_servi) + parseFloat(total_entradas_id);
+
+
+            var myNumeral = numeral (totalentrada);
+            var totalventasservi = myNumeral.format('0,0.000');
+
+            $('#total_entradas').html(totalventasservi+' C$'); 
+            $('#gran_totalentradasid').html(totalentrada.toFixed(3)); 
+            
+  
+
+        }, 
+        
+        language: {
+            "lengthMenu": "Mostrar _MENU_ registros",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sSearch": "Buscar:",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast":"Último",
+                "sNext":"Siguiente",
+                "sPrevious": "Anterior"
+             },
+             "sProcessing":"Procesando...",
+        },
+    
+    
+        responsive: "true",
+        dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",     
+        buttons: [
+        {
+            //Botón para Excel
+            extend: 'excelHtml5',
+            footer: true,
+            title: 'Reporte de utilidades',
+            filename: 'Reporte_de_utilidades'+fecha_expor,
+    
+            //Aquí es donde generas el botón personalizado
+            text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-file-excel"></i></button>'
+        },
+        //Botón para PDF
+        {
+            extend: 'pdfHtml5',
+            orientation: 'landscape',
+            footer: true,
+            title: 'Reporte de utilidades',
+            filename: 'Reporte_de_utilidades'+fecha_expor,
+            text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i></button>',
+            exportOptions: {
+                columns: [0, ':visible']
+            },
+
+        },
+        
+        //Botón para print
+        {
+            extend: 'print',
+            footer: true,
+            filename: 'Imprimir utilidades',
+            text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-print"></i></button>'
+        },
+    //Botón para colvis para ejegir que columnas quieres mostrar
+        // {
+        //     extend: 'colvis',
+        //     text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-crop-alt"></i></button>',
+        //     postfixButtons: ['colvisRestore']
+        // }
+    ],
+    destroy: true,
+  
+    ajax:({          
+        url : 'envios_bd/admin_venta_utilidad.php',
+        method: 'POST', 
+        data : {opc_repor_vta, fecha_1, fecha_2}, 
+        dataSrc:"",
+       }),
+
+       columns:[
+        {data: "id_num_factura"},
+        {data: "id_servicio"},
+        {data: "observaciones"},
+        {data: "total_descuent"},
+        {data: "id_cant_porcendes"},
+        {data: "prec_venta_detall"},
+        {data: "cant_detall"},
+        {data: "sub_total"},
+        {data: "fecha_factura"},
+        {data: "nombre_cliente"},
+        {data: "usuario"},
+        {defaultContent: "<button type='button' class='btn btn-primary btn-sm'  style='width: 80%' disabled><i class='fas fa-check'></i></button>"}, 
+
+    ],
+    
+    });  
+}
+
 /// Funcion de lista de salidas
 function tabla_11 (fecha_1_, fecha_2_) {
 

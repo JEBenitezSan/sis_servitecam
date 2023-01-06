@@ -540,6 +540,7 @@ $(document).on('keyup', '#busc_servi_nombre', function()
         // }
     ],
     destroy: true,
+    order: [[ 0, 'des']],
   
     ajax:({          
         url : 'envios_bd/ingresar_servicio.php',

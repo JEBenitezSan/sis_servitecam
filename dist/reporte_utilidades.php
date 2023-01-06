@@ -56,7 +56,9 @@
 <div style="display: none;">
     <h5 id="total_salidas_id"></h5>
     <h5 id="total_entradas_id"></h5>
+    <h5 id="total_servicios_id"></h5>
     <h5 id="total_salario_id"></h5>
+    <h4 id="gran_totalentradasid"></h4>
 </div>
 
 
@@ -102,7 +104,7 @@
     <!----------------------------------------------------------->
 </div>
 
-<!----------------------------------------------------------->
+<!------------------------Productos----------------------------------->
 <div class="card border_perso mb-4 card_info_utili" style="max-width: 100%;">
 
   <div class="card-header alert alert-primary container_son" role="alert">
@@ -152,7 +154,59 @@
         
         </div>
 </div>
+<!------------------------Servicios----------------------------------->
+
+<div class="card border_perso mb-4 card_info_utili" style="max-width: 100%;">
+
+  <div class="card-header alert" role="alert"  style="background-color: #7C9BC9;">
+      <h4 align="center">Reporte. Servicios </h4> 
+  </div>
+        <div class="card-body text_primary">
+
+        <div class="table-responsive bordes_margen animated fadeIn"> 
+            <table class='table table-bordered table-sm' id='reporte_ventas_servicios' style="width: 100%; background-color: #ffffff;">
+                <thead class="table-primary">
+                <tr align="center">
+                    <th scope="col"><i class="fa fa-key" aria-hidden="true"></i></th>
+                    <th scope="col">C_Barra</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col"><i class="fas fa-tags"></i> Neto</th>
+                    <th scope="col"><i class="fas fa-tags"></i> Apli</th>
+                    <th scope="col">P_Venta</th>
+                    <th scope="col">Cant</th>
+                    <th scope="col">S_Total</th>
+                    <th scope="col">Fecha_Fac</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Vendedor</th>
+                    <th scope="col">Actiones</th>
+                </tr>
+                </thead>
+                <tbody align="center">
+
+                    <tfoot class="table-primary">
+                        <tr align="center">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        </tr>
+                    </tfoot>
+                </tbody>
+            </table>
+        </div>
+        
+        </div>
+</div>
 <!----------------------------------------------------------->
+
 <!-- 
 <div class="separador"></div> -->
 

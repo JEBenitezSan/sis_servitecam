@@ -539,9 +539,12 @@ data_caja_anteriores ();
 /// imprimir factura copia
     $(document).on("click", ".fac_print_copi", function(){
         fila = $(this);	
-        num_factura = parseInt($(this).closest('tr').find('td:eq(1)').text()) ;
+        num_factura = parseInt($(this).closest('tr').find('td:eq(1)').text());
+        tipofac = $(this).closest('tr').find('td:eq(2)').text();
         $(".num_fac").val(num_factura);
-
+        $(".tipo_fac").val(tipofac);
+        
+        
     });
 
     
@@ -702,6 +705,7 @@ function data_produc_fac () {
                 { 
                     const btn_print_copia = '<form id="for_copia_user" method="POST" action="print_copia_fac.php">'+
                                             '<input type="hidden" class="form-control num_fac" name="num_fac" value="" id="num_fac">'+
+                                            '<input type="hidden" class="form-control tipo_fac" name="tipo_fac" value="" id="tipo_fac">'+
                                             ' <button type="submit" class="btn btn-outline-primary btn-sm fac_print_copi">'+
                                                 ' <img src="static/iconos/print.ico" alt="print" width="25" height="25">'+
                                             '  </button>'

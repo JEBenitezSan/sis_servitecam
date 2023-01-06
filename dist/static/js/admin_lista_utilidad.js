@@ -186,6 +186,7 @@ function tabla_ventas_utilidad () {
         // }
     ],
     destroy: true,
+    order: [[ 0, 'des']],
   
     ajax:({          
         url : 'envios_bd/admin_venta_utilidad.php',

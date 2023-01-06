@@ -137,11 +137,11 @@ $pdf->SetFont('Arial', 'B', 8);
 
             foreach ($result as $row) 
 			{		
-            $pdf->Cell (15, 5, $row['nombre_product'], 0, 0, 'L', 0);
+            $pdf->Cell (15, 5, $row['nombre_product'], 0, 0, 'C', 0);
             $pdf->Ln();	
 
-            $pdf->Cell (10, 5, $row['cod_barra'], 0, 0, 'L', 0);  
-            $pdf->Cell (11, 5,'', 0, 0, 'C', 0);
+            $pdf->Cell (15, 5, $row['cod_barra'], 0, 0, 'C', 0);  
+            $pdf->Cell (6, 5,'', 0, 0, 'C', 0);
 			$pdf->Cell (14, 5, $row['prec_venta_detall'], 0, 0, 'C', 0);			
 			$pdf->Cell (14, 5, $row['cant_detall'], 0, 0, 'C', 0);			
             $pdf->Cell (16, 5, $row['sub_total'], 0, 0, 'C', 0);			

@@ -39,6 +39,9 @@ $salario_id = (isset($_POST['salario_id'])) ? $_POST['salario_id'] : '';
 $utilidad_id = (isset($_POST['utilidad_id'])) ? $_POST['utilidad_id'] : '';
 $user = (isset($_POST['user'])) ? $_POST['user'] : '';
 
+$tipo_facturaP = 'Producto';
+$tipo_facturaS = 'Servicio';
+
 
 /// Opc de switch valida que opc ejecutar 
 $opc_repor_vta = (isset($_POST['opc_repor_vta'])) ? $_POST['opc_repor_vta'] : '';
@@ -66,7 +69,7 @@ switch($opc_repor_vta)
             LEFT JOIN `cliente` ON `factura`.`id_cliente` = `cliente`.`id_cliente` 
             LEFT JOIN `usuarios` ON `factura`.`id_usuario` = `usuarios`.`id_usuario`
 
-            WHERE (`factura`.`fecha_factura` >= '$fecha_1') AND (`factura`.`fecha_factura` <= '$fecha_2') 
+            WHERE (`factura`.`fecha_factura` >= '$fecha_1') AND (`factura`.`fecha_factura` <= '$fecha_2') AND (`tipo_factura` = '$tipo_facturaP')
             
             GROUP BY `detalle_factura`.`id_detall_factura`";
         $reporte_venta = $conexion->prepare($repor_venta);
@@ -124,6 +127,38 @@ switch($opc_repor_vta)
 
     break;
 
+    case "lista_servicio":
+        $repor_venservi="SELECT 
+                            `factura`.`id_num_factura`, 
+                            `servicios`.`id_servicio`,
+                            `servicios`.`observaciones`,
+                            `factura`.`total_descuent`,
+                            `factura`.`id_cant_porcendes`,
+                            `detalle_factura`.`prec_venta_detall`,
+                            `detalle_factura`.`cant_detall`,
+                            `detalle_factura`.`sub_total`,
+                            `factura`.`fecha_factura`,
+                            `cliente`.`nombre_cliente`, 
+                            `usuarios`.`usuario`
+
+        FROM `factura` 
+        LEFT JOIN `detalle_factura` ON `detalle_factura`.`id_num_factura` = `factura`.`id_num_factura` 
+        LEFT JOIN `servicios` ON `detalle_factura`.`id_servicio` = `servicios`.`id_servicio` 
+        LEFT JOIN `cliente` ON `factura`.`id_cliente` = `cliente`.`id_cliente` 
+        LEFT JOIN `usuarios` ON `cliente`.`id_usuario` = `usuarios`.`id_usuario`
+
+        WHERE (`factura`.`fecha_factura` >= '$fecha_1') AND (`factura`.`fecha_factura` <= '$fecha_2') AND (`tipo_factura` = '$tipo_facturaS')
+
+        GROUP BY `detalle_factura`.`id_detall_factura`";
+        $reporvenservi = $conexion->prepare($repor_venservi);
+        $reporvenservi->execute(); 
+
+        $data = $reporvenservi->fetchAll(PDO::FETCH_ASSOC);
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+
+
+    break;
+
     case "guardar_uti_final":
 
         $inser_utilidad="INSERT INTO `utilidades`(`id_utili`,
@@ -168,7 +203,8 @@ switch($opc_repor_vta)
                                 `utilidades`.`fecha_2r`,
                                 `usuarios`.`usuario`
                             FROM `utilidades` 
-                                LEFT JOIN `usuarios` ON `utilidades`.`id_usuario` = `usuarios`.`id_usuario`";
+                                LEFT JOIN `usuarios` ON `utilidades`.`id_usuario` = `usuarios`.`id_usuario`
+                                ORDER BY `utilidades`.`id_utili` DESC";
         $listautilidad = $conexion->prepare($lista_utilidad);
         $listautilidad->execute(); 
         
