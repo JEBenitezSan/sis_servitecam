@@ -172,7 +172,7 @@
                 <small class="badge bg-dark">Porcentaje de utilidad</small> 
                 <div class="input-group mb-3">
 
-                <input type="number" class="form-control" name="porcen_utili" id="porcen_utili"
+                <input type="text" class="form-control" name="porcen_utili" id="porcen_utili"
                 placeholder="Digita el precio de compra" aria-label="Digita el % de utilidad" required>
 
                 <span class="input-group-text" id="basic-addon1">
@@ -211,6 +211,13 @@
 <!-----------------------------Formulario---------------------------------------------------->
 </div>
 </div>
+
+<!-- <div class="container-fluid">
+        
+ require_once "stock_productos.php"
+
+</div> -->
+
 
 <!-------------------------------------------------------->
 <?php require_once "plantilla/parte_inferior.html"?>

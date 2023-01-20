@@ -125,6 +125,7 @@ $(document).ready(function() {
             }
         ],
         destroy: true,
+        order: [[ 0, 'des']],
       
         ajax:({          
             url : 'envios_bd/admin_stock.php',
