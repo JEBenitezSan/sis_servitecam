@@ -37,7 +37,7 @@ if(isset($_POST['bus_product']))
 		foreach ($consultaBD as $fila) 
 		{
 
-				echo "<tr id='resul_clon'>
+				echo "<tr id='resul_clon' class='animated fadeIn'>
 				<!--------------------------------------->
 				<td>".$fila['id_stock_produc']."        
 				<input type='hidden' value=".$fila['id_stock_produc']." 

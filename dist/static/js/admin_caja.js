@@ -567,14 +567,13 @@ function datos_widgets (){
                     for(var i = 0; i < js.length; i++)
                           {
                            
-                            salida = js[i].salida;
+                            let salida = js[i].salida;
                             prec_venta_detall = js[i].prec_venta_detall;
                             capital = js[i].capital;
-                            utilidad = js[i].utilidad;
+                            let utilidad = js[i].utilidad;
                             total_efectivo = js[i].total_efectivo_caja;
                             
-                            utilidad_net = js[i].utilidad - js[i].salida;
-
+                            utilidad_net = parseFloat(utilidad) - parseFloat(salida);
 
                             //////-------------------------->
                             if (js[i].salida)
@@ -655,13 +654,13 @@ function data_produc_fac () {
             "footerCallback": function ( row, data, start, end, display )
             {
                 tota_entra_desc = this.api()
-                    .column(7)
+                    .column(8)
                     .data()
                     .reduce(function (a, b) {
                         return parseFloat(a) + parseFloat(b);
                     }, 0 );
                     var tota_entra_desc = tota_entra_desc.toFixed(2);
-                $(this.api().column(7).footer()).html(tota_entra_desc);	
+                $(this.api().column(8).footer()).html(tota_entra_desc);	
 
                 total_entra_sindes = this.api()
                 .column(5)

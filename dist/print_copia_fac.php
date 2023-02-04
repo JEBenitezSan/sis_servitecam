@@ -45,31 +45,40 @@ $cons_result1 = "SELECT `factura`.`id_num_factura`,`factura`.`fecha_factura`,  c
 $result1 = $conexion->prepare($cons_result1);
 $result1->execute(); 
 /////--------------------------Validacion----------------------------------------------////
+switch($tipo_factura) 
+{
+    case "Producto":
             $cons_productos="SELECT
-                                `stock_productos`.`nombre_product`, 
-                                `stock_productos`.`cod_barra`,
-                                `detalle_factura`.`prec_venta_detall`,
-                                `detalle_factura`.`cant_detall`,
-                                `detalle_factura`.`sub_total`
-                                FROM `stock_productos` 
-                                    LEFT JOIN `detalle_factura` ON `detalle_factura`.`id_stock_produc` = `stock_productos`.`id_stock_produc`
-                                    WHERE `detalle_factura`.`id_num_factura` = '$max_factura_numero'";
+                            `stock_productos`.`nombre_product`, 
+                            `stock_productos`.`cod_barra`,
+                            `detalle_factura`.`prec_venta_detall`,
+                            `detalle_factura`.`cant_detall`,
+                            `detalle_factura`.`sub_total`
+                            FROM `stock_productos` 
+                                LEFT JOIN `detalle_factura` ON `detalle_factura`.`id_stock_produc` = `stock_productos`.`id_stock_produc`
+                                WHERE `detalle_factura`.`id_num_factura` = '$max_factura_numero'";
             $result = $conexion->prepare($cons_productos);
             $result->execute(); 
 
+    break;
 
+    case "Servicio":
             $produc_servicio ="SELECT
-                                `servicios`.`observaciones`,
-                                `detalle_factura`.`prec_venta_detall`,
-                                `detalle_factura`.`cant_detall`,
-                                `detalle_factura`.`sub_total`
+                                    `servicios`.`observaciones` AS `nombre_product`,
+                                    `servicios`.`id_servicio` AS `cod_barra`,
+                                    `detalle_factura`.`prec_venta_detall`,
+                                    `detalle_factura`.`cant_detall`,
+                                    `detalle_factura`.`sub_total`
 
-                                FROM `detalle_factura` 
-                                    LEFT JOIN `servicios` ON `detalle_factura`.`id_servicio` = `servicios`.`id_servicio`
-                                    WHERE `detalle_factura`.`id_num_factura` = '$max_factura_numero'";
+                                    FROM `detalle_factura` 
+                                        LEFT JOIN `servicios` ON `detalle_factura`.`id_servicio` = `servicios`.`id_servicio`
+                                        WHERE `detalle_factura`.`id_num_factura` = '$max_factura_numero'";
                                     
             $result = $conexion->prepare($produc_servicio);
-            $result->execute(); 
+            $result->execute();     
+    break;
+}
+
 
 
 /////------------------------------------------------------------------------////
@@ -98,7 +107,7 @@ foreach ($consulta_numcat as $num_produc)
 {
     $num_pro_largo = $num_produc['num_productos'];
 }
-$largo2 = $num_pro_largo * 9;
+$largo2 = $num_pro_largo * 10;
 $largo =  $largo2 + 180;
 
 require('plantilla/framework/fpdf/fpdf.php');
@@ -150,11 +159,12 @@ $pdf->SetFont('Arial', 'B', 8);
 
             foreach ($result as $row) 
 			{			
-            $pdf->Cell (15, 5, $row['nombre_product'], 0, 0, 'C', 0);
-            $pdf->Ln();	
-
-            $pdf->Cell (15, 5, $row['cod_barra'], 0, 0, 'C', 0);  
-            $pdf->Cell (6, 5,'', 0, 0, 'C', 0);
+           
+            $pdf->Write(5, $row['nombre_product'], 0, 0,'L', 0);
+            $pdf->Ln(4);	
+            $pdf->Cell (15, 5, $row['cod_barra'], 0, 0, 'L', 0);  
+            $pdf->Ln(4);	
+            $pdf->Cell (21, 5,'-------------------', 0, 0, 'L', 0);
 			$pdf->Cell (14, 5, $row['prec_venta_detall'], 0, 0, 'C', 0);			
 			$pdf->Cell (14, 5, $row['cant_detall'], 0, 0, 'C', 0);			
             $pdf->Cell (16, 5, $row['sub_total'], 0, 0, 'C', 0);			
