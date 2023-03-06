@@ -51,7 +51,7 @@ switch($opc_repor_vta)
     case "lista_repor_venta":
 
         $repor_venta="SELECT 
-                        `factura`.`id_num_factura`, 
+                        `factura`.`id_num_factura`,
                         `stock_productos`.`cod_barra`,
                         `stock_productos`.`nombre_product`,
                         `factura`.`total_descuent`,
@@ -59,6 +59,7 @@ switch($opc_repor_vta)
                         `detalle_factura`.`prec_venta_detall`,
                         `detalle_factura`.`cant_detall`,
                         `detalle_factura`.`sub_total`,
+                        (`cat_precio`.`prec_compra`) *  (`detalle_factura`.`cant_detall`) AS `prec_compra`,
                         `factura`.`fecha_factura`,
                         `cliente`.`nombre_cliente`, 
                         `usuarios`.`usuario`
@@ -66,10 +67,12 @@ switch($opc_repor_vta)
         FROM `factura` 
             LEFT JOIN `detalle_factura` ON `detalle_factura`.`id_num_factura` = `factura`.`id_num_factura` 
             LEFT JOIN `stock_productos` ON `detalle_factura`.`id_stock_produc` = `stock_productos`.`id_stock_produc` 
+            LEFT JOIN `cat_precio` ON `cat_precio`.`id_stock_produc` = `stock_productos`.`id_stock_produc` 
             LEFT JOIN `cliente` ON `factura`.`id_cliente` = `cliente`.`id_cliente` 
-            LEFT JOIN `usuarios` ON `factura`.`id_usuario` = `usuarios`.`id_usuario`
+            LEFT JOIN `usuarios` ON `cat_precio`.`id_usuario` = `usuarios`.`id_usuario`
 
-            WHERE (`factura`.`fecha_factura` >= '$fecha_1') AND (`factura`.`fecha_factura` <= '$fecha_2') AND (`tipo_factura` = '$tipo_facturaP')
+            WHERE (`factura`.`fecha_factura` >= '$fecha_1') AND (`factura`.`fecha_factura` <= '$fecha_2') AND (`tipo_factura` = '$tipo_facturaP') AND
+             `cat_precio`.`id_precio` = (SELECT MAX(`cat_precio`.`id_precio`) FROM `cat_precio` WHERE `cat_precio`.`id_stock_produc` = `stock_productos`.`id_stock_produc`)
             
             GROUP BY `detalle_factura`.`id_detall_factura`";
         $reporte_venta = $conexion->prepare($repor_venta);

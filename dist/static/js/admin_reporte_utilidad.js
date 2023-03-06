@@ -58,13 +58,13 @@ $('#total_utilidad').html('0.000 C$');
 $("#cal_utili").click(function(){
 
     total_salidas_id = document.getElementById("total_salidas_id").textContent;
-    total_entradas_id = document.getElementById("total_entradas_id").textContent;
+    total_gananciapro_id = document.getElementById("total_gananciapro_id").textContent;
     total_salario_id = document.getElementById("total_salario_id").textContent;
 
-    console.log(total_salidas_id, total_entradas_id, total_salario_id);
+    console.log(total_salidas_id, total_gananciapro_id, total_salario_id);
 
     var total_final = parseFloat(total_salario_id) + parseFloat(total_salidas_id);
-    var total_final_neto = total_entradas_id - total_final;
+    var total_final_neto = total_gananciapro_id - total_final;
 
      var myNumeral = numeral (total_final_neto);
      var totalfinalneto = myNumeral.format('0,0.000');
@@ -88,12 +88,12 @@ $("#guardar_final_utili").click(function(){
     val_fecha_info1 = $.trim($("#fecha_info1").val());
     val_fecha_info2 = $.trim($("#fecha_info2").val());
     total_salidas_id = document.getElementById("total_salidas_id").textContent;
-    gran_totalentradasid = document.getElementById("gran_totalentradasid").textContent;
+    gran_totalentradasid = document.getElementById("total_gananciapro_id").textContent;
     total_salario_id = document.getElementById("total_salario_id").textContent;
     user_planilla = document.getElementById("user_planilla").value;
     
     var total_final = parseFloat(total_salario_id) + parseFloat(total_salidas_id);
-    var total_final_neto = gran_totalentradasid - total_final;
+    var total_final_neto = total_gananciapro_id - total_final;
     opc_repor_vta = "guardar_uti_final" 
 
     if (( val_fecha_info1 == 0) || ( val_fecha_info2 == 0)) {
@@ -110,7 +110,7 @@ $("#guardar_final_utili").click(function(){
             fech1: val_fecha_info1,
             fech2: val_fecha_info2,
             salida_id: total_salidas_id,
-            entrada_id: gran_totalentradasid,
+            entrada_id: total_gananciapro_id,
             salario_id: total_salario_id,
             utilidad_id: total_final_neto,
             user: user_planilla,
@@ -169,18 +169,7 @@ function tabla_ventas_utilidad (fecha_1_, fecha_2_) {
 
         "footerCallback": function ( row, data, start, end, display )
         {
-            
-            //----------------->
-
-            total_descuento = this.api()
-                .column(3)
-                .data()
-                .reduce(function (a, b) {
-                    return parseFloat(a) + parseFloat(b);
-                }, 0 );
-                totaldescuento = total_descuento.toFixed(3); 
-            $(this.api().column(3).footer()).html('<i class="fas fa-tags"></i> '+totaldescuento);	
-            
+        
             //----------------->
             
             total_venta = this.api()
@@ -194,9 +183,34 @@ function tabla_ventas_utilidad (fecha_1_, fecha_2_) {
 
             $('#total_entradas_id').html(total_ventas); 
 
+            //----------------->
+
+            total_compra = this.api()
+            .column(8)
+            .data()
+            .reduce(function (a, b) {
+                return parseFloat(a) + parseFloat(b);
+            }, 0 );
+            totalcompra = total_compra.toFixed(3); 
+        $(this.api().column(8).footer()).html('<i class="fas fa-tags"></i> '+totalcompra);	
+
+        let utili_produc = total_ventas - totalcompra;
+        $(this.api().column(9).footer()).html('<i class="fas fa-money-check-alt"></i> '+utili_produc);	
+
+        $('#total_gananciapro_id').html(utili_produc.toFixed(3)); 
+
+
             
 
         }, 
+
+        createdRow: function ( row, data, index )
+        {    
+            $('td', row).eq(7).css('background-color', '#2F98D3');
+            $('td', row).eq(7).css('font-weight', ' bold');
+            $('td', row).eq(8).css('background-color', '#C87141');
+            $('td', row).eq(8).css('font-weight', ' bold');
+        },
         
         language: {
             "lengthMenu": "Mostrar _MENU_ registros",
@@ -276,6 +290,7 @@ function tabla_ventas_utilidad (fecha_1_, fecha_2_) {
         {data: "prec_venta_detall"},
         {data: "cant_detall"},
         {data: "sub_total"},
+        {data: "prec_compra"},
         {data: "fecha_factura"},
         {data: "nombre_cliente"},
         {data: "usuario"},
@@ -323,8 +338,8 @@ function tabla_ventas_servicios (fecha_1_, fecha_2_) {
             $(this.api().column(7).footer()).html('<i class="fas fa-money-bill-wave"></i> '+ total_ventas_servi.toFixed(3));	
             $('#total_servicios_id').html(total_ventas_servi.toFixed(3)); 
 
-            total_entradas_id = document.getElementById("total_entradas_id").textContent;
-            totalentrada = parseFloat(total_ventas_servi) + parseFloat(total_entradas_id);
+            total_gananciapro_id = document.getElementById("total_gananciapro_id").textContent;
+            totalentrada = parseFloat(total_ventas_servi) + parseFloat(total_gananciapro_id);
 
 
             var myNumeral = numeral (totalentrada);

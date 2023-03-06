@@ -87,7 +87,7 @@ foreach ($consulta_numcat as $num_produc)
     $num_pro_largo = $num_produc['num_productos'];
 }
 $largo2 = $num_pro_largo * 9;
-$largo =  $largo2 + 180;
+$largo =  $largo2 + 220;
 
 require('plantilla/framework/fpdf/fpdf.php');
 $pdf = new FPDF('P','mm',array(80, $largo));

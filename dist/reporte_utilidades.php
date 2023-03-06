@@ -58,7 +58,8 @@
     <h5 id="total_entradas_id"></h5>
     <h5 id="total_servicios_id"></h5>
     <h5 id="total_salario_id"></h5>
-    <h4 id="gran_totalentradasid"></h4>
+    <h5 id="gran_totalentradasid"></h5>
+    <h5 id="total_gananciapro_id"></h5>
 </div>
 
 
@@ -124,6 +125,7 @@
                     <th scope="col">P_Venta</th>
                     <th scope="col">Cant</th>
                     <th scope="col">S_Total</th>
+                    <th scope="col">P_compra</th>
                     <th scope="col">Fecha_Fac</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Vendedor</th>
@@ -134,6 +136,7 @@
 
                     <tfoot class="table-primary">
                         <tr align="center">
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
