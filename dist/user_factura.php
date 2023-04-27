@@ -1,47 +1,63 @@
 <?php require_once "plantilla/parte_superior_user.html"?>
 <link rel="stylesheet" href="static/css_user/estilo_factura.css"> 
+<!----------------------------------------------------------->
+<?php 
+include_once "conexion/conexion_user.php";
+$objeto = new Conexion();
+$conexion = $objeto->Conectar();
+
+        $num_factura= "SELECT `id_num_factura` FROM `factura`ORDER BY `id_num_factura` DESC LIMIT 1";
+        $numfactura = $conexion->prepare($num_factura);
+        $numfactura->execute();
+
+        $numfactura_generar = 0;
+        foreach ($numfactura as $row) 
+        {
+        $numfactura_generar = $row['id_num_factura'];
+        }
+
+?>
+
+<!----------------------------------------------------------->
 <div class="container-fluid">
+  
 
   <!----------------------------------------------------------->
     <div class="row">
       <div class="col-md-8">
-        
 
-
-      <div class="row">
-
-            <div class="col-md-6">
-                <h2>Factura de Productos</h2> 
-            </div>
-
-            <div class="col-md-6">
-                  <div class="group mb-3">
-                    <i class="fas fa-search icon"></i>
-                    <input placeholder="Buscar producto por nombre" type="search" class="input_buscar" id="busc_produc_nombre">
-                  </div>
-            </div>
-
-      </div>
-
-
-      <div class="alert alert-secondary animated fadeIn" role="alert">
         <div class="row">
-          <div class="col-md-8">
-              <small class="form-label">Busqueda</small>
-              <input type="number" class="form-control mb-2" id="buscar_produc" placeholder="Buscar producto">
-          </div>
-          <div class="col-md-4">
-      
-          <div class="d-grid gap-2 col-12 mx-auto">
-            <button class="btn btn-primary" id="add_product" type="button">Agregar <i class="fa fa-plus" aria-hidden="true"></i></button>
-            <a href="javascript:window.open('user_print_factura.php','','width=800, height=1000, left=580, top=50, toolbar = yes');" class="btn btn-secondary" role="button" aria-disabled="true"><i class="fa fa-print" aria-hidden="true"></i></a>
 
+          <div class="col-md-6">
+              <h2>Factura de Productos</h2> 
           </div>
 
+          <div class="col-md-6">
+                <div class="group mb-3">
+                   <i class="fas fa-search icon"></i>
+                   <input placeholder="Buscar producto por nombre" type="search" class="input_buscar" id="busc_produc_nombre">
+                </div>
           </div>
+
         </div>
+        
+      <div class="alert alert-secondary animated fadeIn" role="alert">
 
+            <div class="row">
+              <div class="col-md-8">
+                  <small class="form-label">Busqueda</small>
+                  <input type="number" class="form-control mb-2" id="buscar_produc" placeholder="Buscar producto">
+              </div>
+              <div class="col-md-4">
+          
+              <div class="d-grid gap-2 col-12 mx-auto">
+                <button class="btn btn-primary" id="add_product" type="button">Agregar <i class="fa fa-plus" aria-hidden="true"></i></button>
+                <a href="javascript:window.open('user_print_factura.php','','width=800, height=1000, left=580, top=50, toolbar = yes');" class="btn btn-secondary" role="button" aria-disabled="true"><i class="fa fa-print" aria-hidden="true"></i></a>
 
+              </div>
+
+              </div>
+            </div>
 
       </div>
       <!-----------------------Resultado de la busqueda------------------------------------>
@@ -55,10 +71,9 @@
               <th scope="col">Nombre</th>
               <th scope="col">Stock</th>
               <th scope="col">Precio</th>
+              <th scope="col">Precio_Total</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Sub_total</th>
-              <th scope="col">Presen</th>
-              <th scope="col" class="table-danger">Fecha_vence</th>
               <th scope="col" class="table-danger">Cod_V</th>
               <th scope="col" class="table-danger">Can_V</th>
               <th scope="col" class="table-danger">Opc</th>
@@ -77,13 +92,13 @@
   <hr>
   <!----------------------Envio post de factura------------------------------------>
   <form name="form_factura" id="form_factura" method="POST" >
-      <div class="alert detall_fac" role="alert">
+      <div class="alert alert-primary" role="alert">
         <h5>Detalles</h5>
         <hr>
 
 
         <div class="table-responsive"> 
-        <table class='table responsive-table table-bordered border-primary table-sm' style="background-color: #ffffff;" id='tabla' name='produc_resul'>
+        <table class='table responsive-table table-bordered border-primary table-sm' id='tabla' name='produc_resul'>
           <thead class="table-primary">
             <tr align="center">
               <th scope="col"><i class="fa fa-key" aria-hidden="true"></i></th>
@@ -91,10 +106,9 @@
               <th scope="col">Nombre</th>
               <th scope="col">Stock</th>
               <th scope="col">Precio</th>
+              <th scope="col">Precio_Total</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Sub_total</th>
-              <th scope="col">Presen</th>
-              <th scope="col">Fecha_vence</th>
               <th scope="col">Cod_V</th>
               <th scope="col">Can_V</th>
               <th scope="col">Borrar</th>
@@ -116,9 +130,9 @@
       
       <div class="col-md-4">
 
-      <div class="alert detall_fac animated fadeIn" role="alert">
+      <div class="alert alert-primary animated fadeIn" role="alert">
 
-            <h5 value>Factura numero: 15</h5>
+            <h5 value>Factura numero: <?php echo $numfactura_generar+1; ?></h5>
             <hr class="hr_class">
 
             <small class="form-label">Cliente</small>
@@ -145,9 +159,7 @@
                         <label class="form-check-label" for="deshabilitar_descuent">Aplicar nuevo decuento solo Admin</label>
                       </div>
 
-                      <small class="form-label">
-                      Aplica descuento
-                      </small>
+                      <small class="form-label">Aplica descuento</small>
                       <div class="input-group">
                           <select class="form-select decuento_apli" id="decuento_apli" name="decuento_apli" required>
 
@@ -168,13 +180,7 @@
                           name="total_fac_neto" id="total_fac_neto" placeholder="Total Neto:"  
                           readonly required>
                           <br>
-                      <button type="submit" class="btn btn-primary btn-lg mb-2" style="width: 100%"> 
-                      Facturar
-                      <i class="fa fa-cog fa-spin fa-fw"></i>
-                    </button>
-                    <hr class="hr_class">
               
-
                   <div class="row">
                       <div class="col-md-7">
                       <input type="number" value="" class="form-control efectivo_fac mb-2" style="width: 100%"
@@ -188,6 +194,20 @@
                             required readonly>
                       </div>
                   </div>
+
+                <div class="form-floating">
+                  <textarea class="form-control" name="condiciones_fac" placeholder="Condiciones" id="tex_condiciones"></textarea>
+                  <label for="tex_condiciones">Condiciones</label>
+                </div>
+
+                  <hr class="hr_class">
+
+                  <button type="submit" class="btn btn-primary btn-lg mb-2" style="width: 100%"> 
+                    Facturar
+                    <i class="fa fa-cog fa-spin fa-fw"></i>
+                  </button>
+    
+
                   
               </div>
   <!----------------------Envio post de factura fin--------------------------------->
@@ -199,7 +219,7 @@
     </div>
  <!----------------------------------------------------------->      
 </div>
-
+<!----------------------------------------------------------->      
 <?php require_once "plantilla/parte_inferior_user.html"?>
 
 <?php require_once "modales/modal_cliente.php";?>
@@ -207,5 +227,5 @@
 <?php require_once "modales/modal_confirmar_admin.php";?>
 
 
-<script src="static/js_user/factura.js"></script>
+<script src="static/js_user/factura_user.js"></script>
   

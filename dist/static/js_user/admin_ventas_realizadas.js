@@ -17,8 +17,9 @@ data_produc_fac ( id_usuario );
 
         fila = $(this).closest("tr");	
         num_factura = parseInt(fila.find('td:eq(1)').text());
+        tipo_fac = fila.find('td:eq(2)').text();
 
-        detalle_porfactura ( num_factura );
+        detalle_porfactura ( num_factura, tipo_fac);
 
         $('#modal_detalle_venta').modal({backdrop: 'static', keyboard: false})
         $('#modal_detalle_venta').modal('show');
@@ -28,9 +29,11 @@ data_produc_fac ( id_usuario );
 /// imprimir factura copia
     $(document).on("click", ".fac_print_copi", function(){
 
-        fila = $(this);	
-        num_factura = parseInt($(this).closest('tr').find('td:eq(1)').text()) ;
+        num_factura = parseInt($(this).closest('tr').find('td:eq(1)').text());
+        tipofac = $(this).closest('tr').find('td:eq(2)').text();
         $(".num_fac").val(num_factura);
+        $(".tipo_fac").val(tipofac);
+        
 
     });
 
@@ -86,32 +89,33 @@ function data_produc_fac ( id_usuario ) {
             createdRow: function ( row, data, index )
             {    
                 $('td', row).eq(0).css('background-color', '#E7E7E7');
-                $('td', row).eq(7).css('background-color', '#34A2CB');
-                $('td', row).eq(7).css('font-weight', ' bold');
+                $('td', row).eq(8).css('background-color', '#34A2CB');
+                $('td', row).eq(8).css('font-weight', ' bold');
 
                 if (data['confirma_caja'] == "Pendiente" )
                 {
-                    $('td', row).eq(12).html("<button type='button' class='btn btn_perso_s btn-sm comfirmar_fac'><i class='fas fa-stopwatch fa-lg'></i></button>"); 
-                    $('td', row).eq(12).css('background-color', '#E7E7E7');
+                    $('td', row).eq(13).html("<button type='button' class='btn btn_perso_s btn-sm comfirmar_fac'><i class='fas fa-stopwatch fa-lg'></i></button>"); 
+                    $('td', row).eq(13).css('background-color', '#E7E7E7');
 
-                    $('td', row).eq(7).css('background-color', '#c9422a');
-                    $('td', row).eq(10).css('background-color', '#c9422a');
-                    $('td', row).eq(10).html("<i class='fas fa-exclamation-triangle'></i><strong> Pendiente</strong>");
+                    $('td', row).eq(8).css('background-color', '#c9422a');
+                    $('td', row).eq(11).css('background-color', '#c9422a');
+                    $('td', row).eq(11).html("<i class='fas fa-exclamation-triangle'></i><strong> Pendiente</strong>");
                 }
         
                 if (data['confirma_caja'] == "Recibido" ) 
                 { 
-                     const btn_print_copia = '<form id="for_copia_user" method="POST" action="print_copia_fac.php">'+
+                     const btn_print_copia = '<form id="for_copia_user" method="POST" action="user_print_copia_fac.php">'+
                                             '<input type="hidden" class="form-control num_fac" name="num_fac" value="" id="num_fac">'+
+                                            '<input type="hidden" class="form-control tipo_fac" name="tipo_fac" value="" id="tipo_fac">'+
                                             ' <button type="submit" class="btn btn-outline-primary btn-sm fac_print_copi">'+
                                                 ' <img src="static/iconos/print.ico" alt="print" width="25" height="25">'+
                                             '  </button>'
                                             '</form>';
 
-                    $('td', row).eq(12).html(btn_print_copia); 
+                    $('td', row).eq(13).html(btn_print_copia); 
                     // $('td', row).eq(12).css('background-color', '#E7E7E7');
-                    $('td', row).eq(10).css('background-color', '#34A2CB');
-                    $('td', row).eq(10).html("<i class='fas fa-check'></i> <strong> Recibido</strong>");
+                    $('td', row).eq(11).css('background-color', '#34A2CB');
+                    $('td', row).eq(11).html("<i class='fas fa-check'></i> <strong> Recibido</strong>");
                 }
             },
             
@@ -193,6 +197,7 @@ function data_produc_fac ( id_usuario ) {
                 defaultContent: '<img src="static/iconos/shoppingcar.ico" alt="Exito" width="32" height="32">',
             }, 
             {data: "id_num_factura"},
+            {data: "tipo_factura"},
             {data: "id_cliente"},
             {data: "nombre_apellido"},
             {data: "cant_detall"},
@@ -211,12 +216,12 @@ function data_produc_fac ( id_usuario ) {
 }
 
 /// Datos de detalle de facturas, modal todo los productos que estan cargados por cada factura
-function detalle_porfactura ( num_factura ) {
+function detalle_porfactura ( num_factura, tipo_fac ) {
 
     var today = new Date();
     const fecha_expor = today.toLocaleString() 
     
-    var opc_fac = "detalle_factura";
+    var opc_fac_user = "detalle_fac";
 
          const btn_accion_factu = "<div class='text-center'>"+
                                         "<div class='btn-group'>"+
@@ -291,9 +296,9 @@ function detalle_porfactura ( num_factura ) {
     "order": [[ 1, "desc" ]],
     
     ajax:({          
-        url : 'envios_bd/admin_factura.php',
+        url : 'envios_bd/user_admin_caja.php',
         method: 'POST', 
-        data : {num_factura, opc_fac}, 
+        data : {num_factura, tipo_fac, opc_fac_user}, 
         dataSrc:"",
        }),
 // <div class="entra_detalle_caja">  </div>

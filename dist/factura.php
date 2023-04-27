@@ -213,7 +213,7 @@ $conexion = $objeto->Conectar();
     </div>
  <!----------------------------------------------------------->      
 </div>
-<!----------------------------------------------------------->
+<!---------------------------------------------------------->
 <?php require_once "plantilla/parte_inferior.html"?>
 <?php require_once "modales/modal_cliente.php";?>
 <?php require_once "modales/modal_descuento.php";?>

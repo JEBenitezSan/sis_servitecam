@@ -16,6 +16,7 @@
             <tr>
               <th scope="col"><img src="static/iconos/detalle.ico" alt="Exito" width="25" height="25"></th>
               <th scope="col">Num_Fac</th>
+              <th scope="col">Tpo_Fac</th>
               <th scope="col">Cod_cliente</th>
               <th scope="col">Nombre_cliente</th>
               <th scope="col">Cantidad</th>
@@ -47,6 +48,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             </tr>
         </tfoot>
 
@@ -61,9 +63,7 @@
 <!----------------------------------------------------------->
 <?php require_once "plantilla/parte_inferior_user.html"?>
 
-
 <?php require_once "modales/modal_detalleventa.php"?>
-
 
 <script src="static/js_user/admin_ventas_realizadas.js"></script>
 

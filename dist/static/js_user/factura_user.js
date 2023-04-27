@@ -412,8 +412,8 @@ $('.actua_porcedescuento').click(function () {
 });
 
 /// Busqueda de los datos de stock de factura por nombre
-$(obtener_registros());
-function obtener_registros(bus_product)
+$(obtener_todo_productos());
+function obtener_todo_productos(bus_product)
 {
 	$.ajax({
 		url : 'envios_bd/busqueda_produc_all.php',
@@ -432,11 +432,11 @@ $(document).on('keyup', '#busc_produc_nombre', function()
 	var valorBusqueda=$(this).val();
 	if (valorBusqueda!="")
 	{
-		obtener_registros(valorBusqueda);
+		obtener_todo_productos(valorBusqueda);
 	}
 	else
 	{
-		obtener_registros();
+		obtener_todo_productos();
 	}
 });
 

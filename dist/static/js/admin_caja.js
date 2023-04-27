@@ -567,14 +567,18 @@ function datos_widgets (){
                     for(var i = 0; i < js.length; i++)
                           {
                            
-                            let salida = js[i].salida;
+                            salida = js[i].salida;
                             prec_venta_detall = js[i].prec_venta_detall;
                             capital = js[i].capital;
-                            let utilidad = js[i].utilidad;
+                            utilidad = js[i].utilidad;
                             total_efectivo = js[i].total_efectivo_caja;
                             
-                            utilidad_net = parseFloat(utilidad) - parseFloat(salida);
-
+                            if (js[i].salida == null)
+                            {
+                                salida = 0;
+                            }
+                                utilidad_net = parseFloat(utilidad) - parseFloat(salida);
+                            
                             //////-------------------------->
                             if (js[i].salida)
                             {
@@ -593,7 +597,7 @@ function datos_widgets (){
                             }
                             //////-------------------------->
                             if (js[i].capital)
-                            {
+                            { 
                                 $('#total_capital').html(capital + ' C$');    
                             }
                             else if (js[i].capital == null){
@@ -602,8 +606,8 @@ function datos_widgets (){
                             //////-------------------------->
                             if (js[i].utilidad)
                             {
-                                $('#total_utilidad').html(utilidad_net.toFixed(3)+' C$');
-                                $('#total_utilidad_input').val(utilidad_net.toFixed(3));
+                                $('#total_utilidad').html(utilidad_net+' C$');
+                                $('#total_utilidad_input').val(utilidad_net);
                             }
                             else if (js[i].utilidad == null){
                                 $('#total_utilidad').html('0.00 C$');
