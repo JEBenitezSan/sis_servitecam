@@ -67,6 +67,7 @@ switch($opc_stock)
                             LEFT JOIN `cat_precio` ON `cat_precio`.`id_stock_produc` = `stock_productos`.`id_stock_produc`
                             
                             WHERE `cat_precio`.`id_precio` = (SELECT MAX(`cat_precio`.`id_precio`) FROM `cat_precio` WHERE `cat_precio`.`id_stock_produc` = `stock_productos`.`id_stock_produc`)
+                             AND `detalle_stock_product`.`cant_producto` <> 0
                             ORDER BY `stock_productos`.`cod_barra` ASC";
         $stockproductos = $conexion->prepare($stock_productos);
         $stockproductos->execute(); 

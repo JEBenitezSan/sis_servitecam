@@ -61,7 +61,7 @@ $(document).ready(function() {
                 //Aquí es donde generas el botón personalizado
                 text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-file-excel fa-lg"></i></button>',
                 exportOptions: {
-                    columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
+                    columns: [0,1,2,3,4,5,6,7,8,9,10]
                 },
             },
             //Botón para PDF
@@ -73,7 +73,7 @@ $(document).ready(function() {
                 filename: 'Reporte_de_stock_'+fecha_expor,
                 text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf fa-lg"></i></button>',
                 exportOptions: {
-                    columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
+                    columns: [0,1,2,3,4,5,6,7,8,9,10]
                 },
     
             },
@@ -85,7 +85,7 @@ $(document).ready(function() {
                 filename: 'Imprimir stock',
                 text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-print fa-lg"></i></button>',
                 exportOptions: {
-                    columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
+                    columns: [0,1,2,3,4,5,6,7,8,9,10]
                 },
                 customize: function(win)
                 {
@@ -117,12 +117,7 @@ $(document).ready(function() {
                     head.appendChild(style);
                 }
             },
-        //Botón para colvis para ejegir que columnas quieres mostrar
-            {
-                extend: 'colvis',
-                text: '<button type="button" class="btn btn-primary btn-sm"><i class="fas fa-crop-alt fa-lg"></i></button>',
-                postfixButtons: ['colvisRestore']
-            }
+
         ],
         destroy: true,
         order: [[ 0, 'des']],
@@ -173,7 +168,7 @@ $(document).ready(function() {
             const cod_barra = ($(this).closest('tr').find('td:eq(1)').text()) ;
             const nombre_product = ($(this).closest('tr').find('td:eq(2)').text()) ;
             const cant_stock = parseInt($(this).closest('tr').find('td:eq(3)').text()) ;
-            const categoria = ($(this).closest('tr').find('td:eq(4)').text()) ;
+            const categoria = ($(this).closest('tr').find('td:eq(5)').text()) ;
             const id_precio = parseInt($(this).closest('tr').find('td:eq(6)').text()) ;
             const prec_compra = parseFloat($(this).closest('tr').find('td:eq(7)').text()) ;
             const porcen_utili = parseFloat($(this).closest('tr').find('td:eq(8)').text()) ;

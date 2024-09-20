@@ -12,7 +12,7 @@
 
 	 <div class="modal-body">
 
-                <form id="form_cliente" method="POST">
+                <form id="form_cliente" method="POST" autocomplete="off">
 
                 <div class="col-md-12">
                 <div class="container-fluid">

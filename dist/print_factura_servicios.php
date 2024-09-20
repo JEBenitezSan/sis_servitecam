@@ -207,7 +207,7 @@ $pdf->SetFont('Arial', 'B', 8);
 
             $pdf->Ln (5);
             $pdf->Cell(2,3,'Cambio: ', 0, 0, 'C', 0);
-            $pdf->Cell(27,3,'36.70', 0, 0, 'C', 0);
+            $pdf->Cell(27,3,'36.80', 0, 0, 'C', 0);
 
             $pdf->Ln (6);
 
