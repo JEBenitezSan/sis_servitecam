@@ -572,13 +572,13 @@ function datos_widgets (){
                             capital = js[i].capital;
                             utilidad = js[i].utilidad;
                             total_efectivo = js[i].total_efectivo_caja;
-                            
+
                             if (js[i].salida == null)
                             {
                                 salida = 0;
                             }
-                                utilidad_net = parseFloat(utilidad) - parseFloat(salida);
-                            
+                            utilidad_net = parseFloat(prec_venta_detall) - parseFloat(capital) - parseFloat(salida);
+
                             //////-------------------------->
                             if (js[i].salida)
                             {
@@ -604,7 +604,7 @@ function datos_widgets (){
                                 $('#total_capital').html('0.00 C$');
                             }
                             //////-------------------------->
-                            if (js[i].utilidad)
+                            if (utilidad_net)
                             {
                                 $('#total_utilidad').html(utilidad_net+' C$');
                                 $('#total_utilidad_input').val(utilidad_net);
