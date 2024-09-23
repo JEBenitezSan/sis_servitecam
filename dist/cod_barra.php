@@ -33,7 +33,7 @@ foreach ($concant as $row)
      }
 </style>
 
-<nav class="navbar navbar-light bg-dark animated">
+<nav class="navbar navbar-light bg-light animated">
   <div class="container">
        <a class="btn btn-primary regresar" href="stock_productos.php" role="button">
        <img src="static/iconos/regresar.ico" alt="" width="25" height="25">&nbsp;&nbsp; 
