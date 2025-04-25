@@ -218,7 +218,7 @@ switch($opc_caja)
             WHERE `tipo_factura` ='Servicio' AND `id_caja` ='$caja_abierta') AS `total_efectivo_caja`,
 
                (SELECT TRUNCATE( SUM(`total_fac_neto`), 3) AS `tota_servi` FROM `factura`
-            WHERE `tipo_factura` ='Servicio' AND `id_caja` ='18') AS `total_servicios`
+            WHERE `tipo_factura` ='Servicio' AND `id_caja` ='$caja_abierta') AS `total_servicios`
 
                  FROM `factura` 
                      LEFT JOIN `detalle_factura` ON `detalle_factura`.`id_num_factura` = `factura`.`id_num_factura` 
