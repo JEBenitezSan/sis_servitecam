@@ -90,7 +90,7 @@ $consul_widg= "SELECT `id_caja` FROM `caja` WHERE `estado_caja` = 'Abierto'";
 </div>
 <!----------------------------------------------------------->
 <br>
-<!--------------------Menu--------------------------------------->
+<!--------------------Menu Prin--------------------------------------->
 <nav class="navbar navbar-expand-lg navbar-light color_menu animated fadeIn">
   <div class="container-fluid">
      <a class="navbar-brand" href="#">
