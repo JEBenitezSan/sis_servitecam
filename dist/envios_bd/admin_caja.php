@@ -198,7 +198,9 @@ switch($opc_caja)
            $consulta_consul_widgets="SELECT 
                     
           TRUNCATE( (SUM( (`detalle_factura`.`prec_venta_detall`) * (`detalle_factura`.`cant_detall`) ))
-          - ( SELECT SUM(`factura`.`total_descuent`) FROM `factura` WHERE `factura`.`id_caja` = '$caja_abierta'),3) AS `prec_venta_detall`,  
+          - ( SELECT SUM(`factura`.`total_descuent`) FROM `factura` WHERE `factura`.`id_caja` = '$caja_abierta'),3)  + 
+            (SELECT TRUNCATE( SUM(`total_fac_neto`), 3) AS `tota_servi` FROM `factura`
+            WHERE `tipo_factura` ='Servicio' AND `id_caja` ='$caja_abierta') AS `prec_venta_detall`,  
    
           SUM( (`cat_precio`.`prec_compra`) * (`detalle_factura`.`cant_detall`) ) AS 'capital',
 
@@ -211,7 +213,12 @@ switch($opc_caja)
           TRUNCATE( (SELECT SUM(`monto_salida`) FROM `salida` WHERE `id_caja` = '$caja_abierta'), 3) AS `salida`,
 
           TRUNCATE( ( SUM((`detalle_factura`.`prec_venta_detall`) * (`detalle_factura`.`cant_detall`)) - 
-            (SELECT SUM(`factura`.`total_descuent`) FROM `factura` WHERE `factura`.`id_caja` = '$caja_abierta') ), 3) AS `total_efectivo_caja`
+            (SELECT SUM(`factura`.`total_descuent`) FROM `factura` WHERE `factura`.`id_caja` = '$caja_abierta') ), 3)  + 
+            (SELECT TRUNCATE( SUM(`total_fac_neto`), 3) AS `tota_servi` FROM `factura`
+            WHERE `tipo_factura` ='Servicio' AND `id_caja` ='$caja_abierta') AS `total_efectivo_caja`,
+
+               (SELECT TRUNCATE( SUM(`total_fac_neto`), 3) AS `tota_servi` FROM `factura`
+            WHERE `tipo_factura` ='Servicio' AND `id_caja` ='18') AS `total_servicios`
 
                  FROM `factura` 
                      LEFT JOIN `detalle_factura` ON `detalle_factura`.`id_num_factura` = `factura`.`id_num_factura` 

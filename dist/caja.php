@@ -26,47 +26,69 @@ $consul_widg= "SELECT `id_caja` FROM `caja` WHERE `estado_caja` = 'Abierto'";
 <div class="container-fluid animated fadeIn">
   <h4>Admin Caja</h4>
   <input type="hidden" name="val_caja_abierta" value="<?php echo $caja_abierta;?>" id="val_caja_abierta" readonly>
-<div class="row animated fadeIn">
-<!----------------------------------------------------------->
-    <div class="col-md-3">
-    <div class="card card_caja text-dark bg-light mb-3" id="lista_salida" style="width: 100%; cursor: pointer;">
-            <div class="card-header card_header"><i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;<strong>Salidas</strong></div>
-            <div class="card-body">
-              <h5 class="card-" align="center" id="total_salidas"></h5>
-            </div>
-        </div>
-    </div>
-    <!----------------------------------------------------------->
-    <div class="col-md-3">
-        <div class="card card_caja text-dark bg-light mb-3" style="width: 100%;">
-            <div class="card-header card_header"><i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp;<strong>Entradas</strong>&nbsp;&nbsp; <i class="fas fa-sync fa-spin"></i></div>
-            <div class="card-body">
-              <h5 class="card-" align="center" id="total_entradas"></h5>
-            </div>
-        </div>
-    </div>
-    <!----------------------------------------------------------->
-    <div class="col-md-3">
-        <div class="card card_caja text-dark bg-light mb-3" style="width: 100%;">
-            <div class="card-header card_header"><i class="fas fa-search-dollar fa-lg"></i>&nbsp;&nbsp;<strong>Capital</strong></div>
-            <div class="card-body">
-              <h5 class="card-" align="center" id="total_capital"></h5>
-            </div>
-        </div>
-    </div>
-    <!----------------------------------------------------------->
-    <div class="col-md-3">
-        <div class="card card_caja text-dark bg-light mb-3" style="width: 100%;">
-            <div class="card-header card_header">
-              <i class="fas fa-hand-holding-usd fa-lg"></i>&nbsp;&nbsp;<strong>Utilidad Neta</strong></div>
-              <input type="hidden" name="total_salidas_input" value="" id="total_utilidad_input" readonly>
-            <div class="card-body">
-              <h5 class="card-" align="center" id="total_utilidad"></h5>
-            </div>
-        </div>
-    </div>
-<!----------------------------------------------------------->
+
+<div class="alert alert-primary" role="alert" style="border-radius: 35px;">
+  <div class="row animated fadeIn" style="padding: 7px;">
+  <!----------------------------------------------------------->
+      <div class="col-md-6 col-12 col-lg">
+          <div class="card card_caja text-dark bg-light mb-3" id="lista_salida" style="width: 100%; cursor: pointer;">
+              <div class="card-header" align="center" style="background-color: #aa0000; color: #ffffff">
+                <i class="fas fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;<strong>Salidas</strong></div>
+              <div class="card-body">
+                <h3 class="card-" align="center" id="total_salidas"></h3>
+              </div>
+          </div>
+      </div>
+      <!----------------------------------------------------------->
+      <div class="col-md-6 col-12 col-lg">
+          <div class="card card_caja text-dark bg-light mb-3" style="width: 100%;">
+              <div class="card-header card_header" align="center">
+                <i class="fas fa-cart-arrow-down"></i>&nbsp;&nbsp;<strong>Entradas</strong>&nbsp;&nbsp; <i class="fas fa-sync fa-spin"></i></div>
+              <div class="card-body">
+                <h3 class="card-" align="center" id="total_entradas"></h3>
+              </div>
+          </div>
+      </div>
+      <!----------------------------------------------------------->
+      <div class="col-md-6 col-12 col-lg">
+          <div class="card card_caja text-dark bg-light mb-3" style="width: 100%;">
+              <div class="card-header card_header" align="center">
+                <i class="fas fa-search-dollar fa-lg"></i>&nbsp;&nbsp;<strong>Capital</strong></div>
+              <div class="card-body">
+                <h3 class="card-" align="center" id="total_capital"></h3>
+              </div>
+          </div>
+      </div>
+      <!----------------------------------------------------------->
+      <div class="col-md-6 col-12 col-lg">
+          <div class="card card_caja text-dark bg-light mb-3" style="width: 100%;">
+              <div class="card-header" align="center" style="background-color: #017018; color: #ffffff">
+                <i class="fas fa-hand-holding-usd fa-lg"></i>&nbsp;&nbsp;<strong>Utilidad Neta</strong>
+              </div>
+                <input type="hidden" name="total_salidas_input" value="" id="total_utilidad_input" readonly>
+              <div class="card-body">
+                <h3 class="card-" align="center" id="total_utilidad"></h3>
+
+              </div>
+          </div>
+      </div>
+      <!----------------------------------------------------------->
+      <div class="col-md-6 col-12 col-lg">
+          <div class="card card_caja text-dark bg-light mb-3" style="width: 100%;">
+              <div class="card-header" align="center" style="background-color: #017018; color: #ffffff">
+                <i class="fas fa-hand-holding-usd fa-lg"></i>&nbsp;&nbsp;<strong>Utili_Productos</strong>
+              </div>
+                <input type="hidden" name="total_salidas_input" value="" id="total_utilidad_input" readonly>
+              <div class="card-body">
+                <h3 class="card-" align="center" id="total_uti_servi"></h3>
+
+              </div>
+          </div>
+      </div>
+  <!----------------------------------------------------------->
+  </div>
 </div>
+<!----------------------------------------------------------->
 <br>
 <!--------------------Menu--------------------------------------->
 <nav class="navbar navbar-expand-lg navbar-light color_menu animated fadeIn">

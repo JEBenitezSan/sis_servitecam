@@ -572,13 +572,15 @@ function datos_widgets (){
                             capital = js[i].capital;
                             utilidad = js[i].utilidad;
                             total_efectivo = js[i].total_efectivo_caja;
+                            total_servicios = js[i].total_servicios;
 
                             if (js[i].salida == null)
                             {
                                 salida = 0;
                             }
                             utilidad_net = parseFloat(prec_venta_detall) - parseFloat(capital) - parseFloat(salida);
-
+                            utili_produc =  utilidad_net - parseFloat(total_servicios);
+                            
                             //////-------------------------->
                             if (js[i].salida)
                             {
@@ -603,7 +605,15 @@ function datos_widgets (){
                             else if (js[i].capital == null){
                                 $('#total_capital').html('0.00 C$');
                             }
-                            //////-------------------------->
+                            //////---------UtiProductos----------------->
+                            if (js[i].capital)
+                                { 
+                                    $('#total_capital').html(capital + ' C$');    
+                                }
+                                else if (js[i].capital == null){
+                                    $('#total_capital').html('0.00 C$');
+                                }
+                                //////-------------------------->
                             if (utilidad_net)
                             {
                                 $('#total_utilidad').html(utilidad_net+' C$');
@@ -612,6 +622,14 @@ function datos_widgets (){
                             else if (js[i].utilidad == null){
                                 $('#total_utilidad').html('0.00 C$');
                                 $('#total_utilidad_input').val('0.00');
+                            }
+                           //////-------------------------->
+                           if (utili_produc)
+                            {
+                                $('#total_uti_servi').html(utili_produc+' C$');
+                            }
+                            else if (js[i].total_servicios == null){
+                                $('#total_uti_servi').html('0.00 C$');
                             }
                            //////-------------------------->
                            
