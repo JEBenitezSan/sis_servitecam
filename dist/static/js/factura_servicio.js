@@ -744,18 +744,12 @@ function multi_validar(){
           
                       for(var i = 0; i < cantidad.length; i++)
                         { 
-                          
+                            subtotals[i].value = (sumaprecios[i].value * cantidad_cons); 
                                  cal_total_fact();
-                                 validar_descuento();
+                                //  validar_descuento();
                                  vuelto(); 
-                                 
-                                 subtotals[i].value = (sumaprecios[i].value * cantidad_cons).toFixed(2); 
-                        }
-
-                   
+                        }           
 }
-
-
 
 /// calcula total de la factura
 function cal_total_fact()
@@ -764,7 +758,9 @@ function cal_total_fact()
     $('.total_subcompra').each(function() { 
     total_fac += parseFloat($(this).val()); 
     }); 
-     $("#total_fac_com").val(total_fac.toFixed(3));
+
+    console.log(total_fac);
+     $("#total_fac_com").val(total_fac.toFixed(2));
 
      validar_descuento();
 }

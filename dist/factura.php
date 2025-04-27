@@ -1,5 +1,5 @@
 <?php require_once "plantilla/parte_superior.html"?>
-
+<script src="static/lector_camara/0_12_1_quagga.min.js"></script>
 <?php 
 include_once "conexion/conexion_user.php";
 $objeto = new Conexion();
@@ -34,6 +34,7 @@ $conexion = $objeto->Conectar();
 
           <div class="col-md-6">
                 <div class="group mb-3">
+
                    <i class="fas fa-search icon"></i>
                    <input placeholder="Buscar producto por nombre" type="search" class="input_buscar" id="busc_produc_nombre">
                 </div>
@@ -45,9 +46,17 @@ $conexion = $objeto->Conectar();
 
             <div class="row">
               <div class="col-md-8">
-                  <small class="form-label">Busqueda</small>
-                  <input type="number" class="form-control mb-2" id="buscar_produc" placeholder="Buscar producto">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1" style="border-radius: 25px 0px 0px 25px;"><i class="fas fa-search icon"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <input type="number" class="form-control" id="buscar_produc" placeholder="Buscar producto">
+
+                    <button type="button" class="btn btn-primary" id="startButton" style="display: block; border-radius: 0px 25px 25px 0px;">
+                      <img src="static/iconos/barra2.ico" alt="Buscar" width="20" height="20"/>&nbsp;
+                    </button>
+                </div>
+                <picture id="camera" class="animated fadeIn"></picture>
               </div>
+
               <div class="col-md-4">
           
               <div class="d-grid gap-2 col-12 mx-auto">
@@ -220,6 +229,8 @@ $conexion = $objeto->Conectar();
 
 
 <script src="static/js/factura.js"></script>
+<script src="static/js/lecto_bfactur.js"></script>
+
   
 
 
