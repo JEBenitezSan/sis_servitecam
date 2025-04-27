@@ -14,6 +14,7 @@ const config = {
     },
     decoder: {
       readers: ['code_128_reader'] // Lee códigos de barras CODE_128
+      
     }
   };
 
@@ -51,7 +52,7 @@ const config = {
   
     // Función para enviar el código de barras a PHP
     function sendBarcodeToPHP(barcode) {
-        alert("Código detectado: " + barcode); // 🔥 MOSTRAR ALERTA
+       console.log(barcode); // MOSTRAR ALERTA
         //  obtener_registros(valorBusqueda);
     }
   
