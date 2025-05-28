@@ -183,7 +183,7 @@
                 <small class="form-label">Precio de venta</small>
                 <div class="input-group mb-3">
                 <input type="text" class="form-control" name="precio_vta" id="precio_vta"
-                        placeholder="Digita precio de venta" aria-label="Digita precio de venta" readonly required>
+                        placeholder="Digita precio de venta" aria-label="Digita precio de venta" required onkeyup="obtener_porcen();">
                 </div>
                 <!--------------------------------------------->
                 <!----------------------------------------------------------------------------------

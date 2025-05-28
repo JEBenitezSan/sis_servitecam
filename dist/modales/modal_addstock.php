@@ -91,7 +91,7 @@
                         <small class="form-label">Precio de venta</small>
                         <div class="input-group mb-2">
                           <input type="number" class="form-control" name="prec_vent_add" id="prec_vent_add"
-                            placeholder="Digita precio de venta" aria-label="Digita precio de venta" required readonly>
+                            placeholder="Digita precio de venta" aria-label="Digita precio de venta" required onkeyup="obtener_porcen_add();">
                         </div>
                         <!--------------------------------------------->
                         <small class="form-label">Categoria</small>

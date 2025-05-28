@@ -121,25 +121,7 @@ $(document).ready(function() {
 
 
   });
-//// Obtener lista de laboratorio
-$(obtener_registrio_lab());
-function obtener_registrio_lab(consulta) 
-    {
-    $.ajax({
-        url : 'combo_ajax/com_laboratorio.php',
-        type : 'POST',
-        dataType : 'html',
-  })
- 
-    .done(function(respuesta){
-        $(".laboratorio").html(respuesta);
-    })
-    
-    .fail(function() {
-        console.log("error");	
-  });
-  
- }
+
 //// Obtener lista de proveedores
 $(obtener_registro_prov());
 function obtener_registro_prov(consulta) 
@@ -656,6 +638,57 @@ function ganancia_porcen (pre_compra, porcen_utili, precio_vta){
   var myFloat = aplicar_ganancia = aplicar_ganancia.toFixed(2); 
 
   return aplicar_ganancia;
+ 
+}
+
+
+function obtener_porcen (){
+
+  var myFloat = pre_compra = parseFloat($('#pre_compra').val());
+  var myFloat = porcen_utili = parseFloat($('#porcen_utili').val());
+  var myFloat = precio_vta = parseFloat($('#precio_vta').val());
+
+
+  var myFloat = numcien = 100;
+
+  if (isNaN(porcen_utili) || isNaN(precio_vta))  
+  {
+      porcen_utili=0.00;
+      precio_vta=0.00;
+      
+  }
+  var myFloat = porcentaje = precio_vta / pre_compra;
+  porcentaje_ganancia = parseFloat(porcentaje) * Number(numcien);
+  porcentajeganancia = parseFloat(porcentaje_ganancia) - Number(numcien);
+  var myFloat = porc_ganan = porcentajeganancia.toFixed(2); 
+
+
+  $('input#porcen_utili').val(porc_ganan);
+ 
+}
+
+function obtener_porcen_add (){
+
+  var myFloat = pre_compra = parseFloat($('#pre_compra_add').val());
+  var myFloat = porcen_utili = parseFloat($('#porcen_utili_add').val());
+  var myFloat = precio_vta = parseFloat($('#prec_vent_add').val());
+
+
+  var myFloat = numcien = 100;
+
+  if (isNaN(porcen_utili) || isNaN(precio_vta))  
+  {
+      porcen_utili=0.00;
+      precio_vta=0.00;
+      
+  }
+  var myFloat = porcentaje = precio_vta / pre_compra;
+  porcentaje_ganancia = parseFloat(porcentaje) * Number(numcien);
+  porcentajeganancia = parseFloat(porcentaje_ganancia) - Number(numcien);
+  var myFloat = porc_ganan = porcentajeganancia.toFixed(2); 
+
+
+  $('input#porcen_utili_add').val(porc_ganan);
  
 }
 
