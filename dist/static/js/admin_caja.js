@@ -580,7 +580,7 @@ function datos_widgets (){
                             }
                             utilidad_net = parseFloat(prec_venta_detall) - parseFloat(capital) - parseFloat(salida);
                             utili_produc =  utilidad_net - parseFloat(total_servicios);
-                            
+                           
                             //////-------------------------->
                             if (js[i].salida)
                             {
@@ -600,24 +600,16 @@ function datos_widgets (){
                             //////-------------------------->
                             if (js[i].capital)
                             { 
-                                $('#total_capital').html(capital + ' C$');    
+                                $('#total_capital').html(parseFloat(capital).toFixed(2) + ' C$'); 
                             }
                             else if (js[i].capital == null){
                                 $('#total_capital').html('0.00 C$');
                             }
-                            //////---------UtiProductos----------------->
-                            if (js[i].capital)
-                                { 
-                                    $('#total_capital').html(capital + ' C$');    
-                                }
-                                else if (js[i].capital == null){
-                                    $('#total_capital').html('0.00 C$');
-                                }
                                 //////-------------------------->
                             if (utilidad_net)
-                            {
-                                $('#total_utilidad').html(utilidad_net+' C$');
-                                $('#total_utilidad_input').val(utilidad_net);
+                            {   
+                                $('#total_utilidad').html(parseFloat(utilidad_net).toFixed(2)+' C$');
+                                $('#total_utilidad_input').val(parseFloat(utilidad_net).toFixed(2));
                             }
                             else if (js[i].utilidad == null){
                                 $('#total_utilidad').html('0.00 C$');
