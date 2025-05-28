@@ -2,21 +2,35 @@ $(document).ready(function() {
 
 // Configuración de QuaggaJS para CODE_128
 const config = {
-    inputStream: {
-      name: 'Live',
-      type: 'LiveStream',
-      target: document.querySelector('#camera'),
-      constraints: {
-        width: 400,
-        height: 200,
-        facingMode: 'environment' // Utiliza la cámara trasera (puede ser 'user' para la frontal)
-      },
-    },
-    decoder: {
-      readers: ['code_128_reader'] // Lee códigos de barras CODE_128
-      
+  inputStream: {
+    name: "Live",
+    type: "LiveStream",
+    target: document.querySelector("#camera"),
+    constraints: {
+      width: 840,
+      height: 680,
+      facingMode: "environment"
     }
-  };
+  },
+  locator: {
+    patchSize: "large",
+    halfSample: false
+  },
+  decoder: {
+    readers: [
+      "code_128_reader",
+      "ean_reader",
+      "ean_8_reader",
+      "code_39_reader",
+      "upc_reader",
+      "upc_e_reader"
+    ]
+  },
+  locate: true,
+  frequency: 10,
+  numOfWorkers: navigator.hardwareConcurrency || 4
+};
+
 
   let scannerIsRunning = false;
 

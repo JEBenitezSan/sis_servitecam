@@ -1,5 +1,4 @@
 <?php require_once "plantilla/parte_superior.html"?>
-<script src="static/lector_camara/0_12_1_quagga.min.js"></script>
 <?php 
 include_once "conexion/conexion_user.php";
 $objeto = new Conexion();
@@ -16,7 +15,7 @@ $conexion = $objeto->Conectar();
         }
 
 ?>
-
+<script src="static/lector_camara/0_12_1_quagga.min.js"></script>
 <link rel="stylesheet" href="static/css/factura_estilo.css"> 
 <!----------------------------------------------------------->
 <div class="container-fluid">

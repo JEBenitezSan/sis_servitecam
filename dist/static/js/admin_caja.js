@@ -626,7 +626,7 @@ function datos_widgets (){
                            //////-------------------------->
                            if (utili_produc)
                             {
-                                $('#total_uti_servi').html(utili_produc+' C$');
+                                $('#total_uti_servi').html(utili_produc.toFixed(2)+' C$');
                             }
                             else if (js[i].total_servicios == null){
                                 $('#total_uti_servi').html('0.00 C$');
@@ -635,7 +635,7 @@ function datos_widgets (){
                            
                            var totalcierrecaja = document.getElementById("total_cierre_caja").value;
                            totalefectivocaja = totalcierrecaja - js[i].salida;
-                           $("#to_neto_cajacierre").val(totalefectivocaja);
+                           $("#to_neto_cajacierre").val(totalefectivocaja.toFixed(2));
         
                           }
                }
